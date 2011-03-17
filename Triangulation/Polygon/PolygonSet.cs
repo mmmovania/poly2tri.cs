@@ -30,13 +30,31 @@
  */
 
 /// Changes from the Java version
-///   Turned DTSweepEdgeEvent into a value type
+///   Replaced getPolygons with attribute
+/// Future possibilities
+///   Replace Add(Polygon) with exposed container?
+///   Replace entire class with HashSet<Polygon> ?
+
+using System.Collections.Generic;
 
 namespace Poly2Tri
 {
-    public class DTSweepEdgeEvent
+    public class PolygonSet
     {
-        public DTSweepConstraint ConstrainedEdge;
-        public bool Right;
+        protected List<Polygon> _polygons = new List<Polygon>();
+
+        public PolygonSet() { }
+
+        public PolygonSet(Polygon poly)
+        {
+            _polygons.Add(poly);
+        }
+
+        public void Add(Polygon p)
+        {
+            _polygons.Add(p);
+        }
+
+        public IEnumerable<Polygon> Polygons { get { return _polygons; } }
     }
 }

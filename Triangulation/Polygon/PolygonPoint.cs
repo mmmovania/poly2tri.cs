@@ -30,13 +30,27 @@
  */
 
 /// Changes from the Java version
-///   Turned DTSweepEdgeEvent into a value type
+///   Replaced get/set Next/Previous with attributes
+/// Future possibilities
+///   Documentation!
 
 namespace Poly2Tri
 {
-    public class DTSweepEdgeEvent
+    public class PolygonPoint : TriangulationPoint
     {
-        public DTSweepConstraint ConstrainedEdge;
-        public bool Right;
+        public PolygonPoint(double x, double y) : base(x, y) { }
+
+        public PolygonPoint Next { get; set; }
+        public PolygonPoint Previous { get; set; }
+
+        public static Point2D ToBasePoint(PolygonPoint p)
+        {
+            return (Point2D)p;
+        }
+
+        public static TriangulationPoint ToTriangulationPoint(PolygonPoint p)
+        {
+            return (TriangulationPoint)p;
+        }
     }
 }
